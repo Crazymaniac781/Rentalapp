@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import RentalHome
 
-# Create your views here.
+def home_list(request):
+    rentals = RentalHome.objects.filter(available=True)
+    return render(request, 'rentalapp/home_list.html', {'rentals': rentals})

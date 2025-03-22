@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Rentals</title>
+</head>
+<body>
+    <h1>Available Rentals</h1>
+    <ul>
+        {% for rental in rentals %}
+            <li>
+                <strong>{{ rental.title }}</strong><br>
+                Location: {{ rental.location }}<br>
+                Price: ${{ rental.price }}<br>
+                Bedrooms: {{ rental.bedrooms }} | Bathrooms: {{ rental.bathrooms }}<br>
+                Description: {{ rental.description }}<br>
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

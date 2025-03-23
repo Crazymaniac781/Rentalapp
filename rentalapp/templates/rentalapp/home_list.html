@@ -19,13 +19,32 @@
 <!-- ✅ Page Content -->
 <div class="container py-5">
     <h1 class="mb-4 text-center">Available Rentals</h1>
-
+    <form method="get" class="mb-5 row g-3 justify-content-center">
+        <div class="col-md-3">
+            <input type="text" name="q" class="form-control" placeholder="Search by title..." value="{{ title_query|default:'' }}">
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="location" class="form-control" placeholder="Search by location..." value="{{ location_query|default:'' }}">
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="bedrooms" class="form-control" placeholder="Bedrooms" value="{{ bedrooms_query }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+    
     <div class="row">
         {% for rental in rentals %}
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
-                        <h5 class="card-title">{{ rental.title }}</h5>
+                        <!-- ✅ Rental title links to detail page -->
+                        <h5 class="card-title">
+                          <a href="{% url 'rental_detail' rental.pk %}" class="text-decoration-none text-dark">
+                            {{ rental.title }}
+                          </a>
+                        </h5>
                         <p class="card-text">{{ rental.description }}</p>
                         <ul class="list-unstyled">
                             <li><strong>Location:</strong> {{ rental.location }}</li>
@@ -38,6 +57,7 @@
                         {% else %}
                             <span class="badge bg-danger">Not Available</span>
                         {% endif %}
+                        <span class="badge bg-info text-dark">{{ rental.comments.count }} comment{{ rental.comments.count|pluralize }}</span>
                     </div>
                 </div>
             </div>

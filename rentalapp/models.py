@@ -11,3 +11,12 @@ class RentalHome(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.location}"
+
+class Comment(models.Model):
+    rental = models.ForeignKey(RentalHome, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=50)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Comment by {self.name} on {self.rental.title}"

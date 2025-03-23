@@ -1,22 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Available Rentals</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Available Rentals</h1>
-    <ul>
+<body class="bg-light">
+
+<!-- ✅ Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="/">RentalApp</a>
+    <a class="btn btn-light ms-3" href="/add">Add Rental</a>
+  </div>
+</nav>
+
+<!-- ✅ Page Content -->
+<div class="container py-5">
+    <h1 class="mb-4 text-center">Available Rentals</h1>
+
+    <div class="row">
         {% for rental in rentals %}
-            <li>
-                <strong>{{ rental.title }}</strong><br>
-                Location: {{ rental.location }}<br>
-                Price: ${{ rental.price }}<br>
-                Bedrooms: {{ rental.bedrooms }} | Bathrooms: {{ rental.bathrooms }}<br>
-                Description: {{ rental.description }}<br>
-                <hr>
-            </li>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ rental.title }}</h5>
+                        <p class="card-text">{{ rental.description }}</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Location:</strong> {{ rental.location }}</li>
+                            <li><strong>Price:</strong> ${{ rental.price }}</li>
+                            <li><strong>Bedrooms:</strong> {{ rental.bedrooms }}</li>
+                            <li><strong>Bathrooms:</strong> {{ rental.bathrooms }}</li>
+                        </ul>
+                        {% if rental.available %}
+                            <span class="badge bg-success">Available</span>
+                        {% else %}
+                            <span class="badge bg-danger">Not Available</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
